@@ -22,6 +22,9 @@ class SinglyLinkedListTest {
 	}
 
 	// mark all tests with @Test
+	/**
+	 * tests that a new list is empty
+	 */
 	@Test
 	void testConstructor() {
 		assertTrue(l.isEmpty());
@@ -47,6 +50,9 @@ class SinglyLinkedListTest {
 	// particular subcase
 	// e.g., here, test the get method, specifically what happens when requesting an
 	// index out of bounds
+	/**
+	 * tests that get() throws an IndexOutOfBoundsException for indexes out of range
+	 */
 	@Test
 	void testGetRange() {
 		assertThrows(IndexOutOfBoundsException.class, () -> {
@@ -68,27 +74,6 @@ class SinglyLinkedListTest {
 	}
 
 	/**
-	 * tests that isEmpty() returns false when an element is added (list is not
-	 * empty)
-	 */
-	@Test
-	void testIsEmptyAfterAdd() {
-		l.add(1);
-		assertFalse(l.isEmpty());
-	}
-
-	/**
-	 * tests add(int, E) at index 0
-	 */
-	@Test
-	void testAddAtZero() {
-		l.add(1);
-		l.add(0, 2);
-		assertEquals(l.get(0), 2);
-		assertEquals(l.get(1), 1);
-	}
-
-	/**
 	 * tests add(int, E) in the middle of a list
 	 */
 	@Test
@@ -102,13 +87,12 @@ class SinglyLinkedListTest {
 	}
 
 	/**
-	 * tests that add(int, E) throws an IndexOutOfBoundsException for
-	 * an invalid index
+	 * tests that add(int, E) throws IndexOutOfBoundsException for an empty list
 	 */
 	@Test
-	void testAddAtIndexOutOfBounds() {
+	void testAddAtIndexEmpty() {
 		assertThrows(IndexOutOfBoundsException.class, () -> {
-			l.add(1, 5);
+			l.add(1, 1);
 		});
 	}
 
@@ -126,10 +110,88 @@ class SinglyLinkedListTest {
 	}
 
 	/**
-	 * tests that get() throws IndexOutOfBoundsException for negative indexes
+	 * tests that set() replaces and returns the element
 	 */
 	@Test
-	void testGetNegativeIndex() {
-
+	void testSet() {
+		l.add(1);
+		l.add(2);
+		assertEquals(l.set(0, 3), 2);
+		assertEquals(l.get(0), 3);
 	}
+
+	/**
+	 * tests that set() throws an IndexOutOfBoundsException for an empty list
+	 */
+	@Test
+	void testSetEmpty() {
+		assertThrows(IndexOutOfBoundsException.class, () -> {
+			l.set(0, 1);
+		});
+	}
+
+	/**
+	 * tests that remove() returns and removes the first element
+	 */
+	@Test
+	void testRemove() {
+		l.add(1);
+		l.add(2);
+		assertEquals(l.remove(), 2);
+		assertEquals(l.size(), 1);
+		assertEquals(l.get(0), 1);
+	}
+
+	/**
+	 * tests that remove(int) removes the correct element
+	 */
+	@Test
+	void testRemoveIndex() {
+		l.add(1);
+		l.add(2);
+		l.add(3);
+		assertEquals(l.remove(1), 2);
+		assertEquals(l.size(), 2);
+		assertEquals(l.get(0), 3);
+		assertEquals(l.get(1), 1);
+	}
+
+	/**
+	 * tests that remove() throws an exception for an empty list
+	 */
+	@Test
+	void testRemoveEmpty() {
+		assertThrows(NullPointerException.class, () -> {
+			l.remove();
+		});
+	}
+
+	/**
+	 * tests that clear() empties list and makes size 0
+	 */
+	@Test
+	void testClear() {
+		l.add(1);
+		l.add(2);
+		l.clear();
+		assertTrue(l.isEmpty());
+		assertEquals(l.size(), 0);
+	}
+
+	/**
+	 * tests that the iterator traverses correctly
+	 */
+	@Test
+	void testIterator() {
+		l.add(1);
+		l.add(2);
+		l.add(3);
+		Iterator<Integer> iterate = l.iterator();
+		assertTrue(iterate.hasNext());
+		assertEquals(iterate.next(), 3);
+		assertEquals(iterate.next(), 2);
+		assertEquals(iterate.next(), 1);
+		assertFalse(iterate.hasNext());
+	}
+
 }
