@@ -77,4 +77,59 @@ class SinglyLinkedListTest {
 		assertFalse(l.isEmpty());
 	}
 
+	/**
+	 * tests add(int, E) at index 0
+	 */
+	@Test
+	void testAddAtZero() {
+		l.add(1);
+		l.add(0, 2);
+		assertEquals(l.get(0), 2);
+		assertEquals(l.get(1), 1);
+	}
+
+	/**
+	 * tests add(int, E) in the middle of a list
+	 */
+	@Test
+	void testAddAtMiddleIndex() {
+		l.add(1);
+		l.add(2);
+		l.add(1, 3);
+		assertEquals(l.get(0), 2);
+		assertEquals(l.get(1), 3);
+		assertEquals(l.get(2), 1);
+	}
+
+	/**
+	 * tests that add(int, E) throws an IndexOutOfBoundsException for
+	 * an invalid index
+	 */
+	@Test
+	void testAddAtIndexOutOfBounds() {
+		assertThrows(IndexOutOfBoundsException.class, () -> {
+			l.add(1, 5);
+		});
+	}
+
+	/**
+	 * tests that get() returns the correct element
+	 */
+	@Test
+	void testGet() {
+		l.add(1);
+		l.add(2);
+		l.add(3);
+		assertEquals(l.get(0), 3);
+		assertEquals(l.get(1), 2);
+		assertEquals(l.get(2), 1);
+	}
+
+	/**
+	 * tests that get() throws IndexOutOfBoundsException for negative indexes
+	 */
+	@Test
+	void testGetNegativeIndex() {
+
+	}
 }
