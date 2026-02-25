@@ -53,9 +53,28 @@ class SinglyLinkedListTest {
 			l.get(1);
 		});
 	}
+
 	/**
 	 * tests that size method returns 0 for an empty list and increases with each
 	 * element added
 	 */
+	@Test
+	void testSize() {
+		assertEquals(l.size(), 0);
+		l.add(1);
+		assertEquals(l.size(), 1);
+		l.add(2);
+		assertEquals(l.size(), 2);
+	}
+
+	/**
+	 * tests that isEmpty() returns false when an element is added (list is not
+	 * empty)
+	 */
+	@Test
+	void testIsEmptyAfterAdd() {
+		l.add(1);
+		assertFalse(l.isEmpty());
+	}
 
 }
