@@ -53,5 +53,9 @@ class SinglyLinkedListTest {
 			l.get(1);
 		});
 	}
+	/**
+	 * tests that size method returns 0 for an empty list and increases with each
+	 * element added
+	 */
 
 }
